@@ -1,0 +1,79 @@
+﻿Shader "Unlit/Fresnel"
+{
+    Properties
+    {
+        _FresnelPow ("FresnelPow", Range(0, 5)) = 1
+    }
+    SubShader
+    {
+        
+        Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
+
+        Pass
+        {
+            Tags { "LightMode" = "UniversalForward" }
+            
+            Cull Back
+            
+            HLSLPROGRAM
+            
+            #pragma vertex vert
+            #pragma fragment frag
+
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            
+            CBUFFER_START(UnityPerMaterial)
+            float _FresnelPow;
+            CBUFFER_END
+
+            TEXTURE2D(_MainTex);SAMPLER(sampler_MainTex);
+            
+            struct Attributes
+            {
+                float4 positionOS: POSITION;
+                float2 uv: TEXCOORD0;
+                float3 normalOS: NORMAL;
+            };
+
+
+            struct Varyings
+            {
+                float4 positionCS: SV_POSITION;
+                float2 uv: TEXCOORD0;
+                float3 normalWS: NORMAL;
+            };
+
+
+            
+            Varyings vert(Attributes input)
+            {
+                Varyings output;
+                output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                output.normalWS = TransformObjectToWorldNormal(input.normalOS, true);
+                output.uv = input.uv;
+
+
+                return output;
+            }
+
+
+            float4 frag(Varyings input): SV_Target
+            {
+                float3 viewDir = _WorldSpaceCameraPos.xyz;
+                float3 normalDir = input.normalWS;
+
+                float ndotv = dot(viewDir, normalDir);
+                float oneMin = 1 - ndotv;
+                float fresnel = pow(oneMin, _FresnelPow);
+
+                return fresnel;
+            }
+            
+            ENDHLSL
+            
+        }
+    }
+    FallBack "Diffuse"
+}
