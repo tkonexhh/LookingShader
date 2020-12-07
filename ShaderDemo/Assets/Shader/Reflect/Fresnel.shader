@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _FresnelPow ("FresnelPow", Range(0, 5)) = 1
+        _FresnelPow ("FresnelPow", Range(1, 10)) = 1
     }
     SubShader
     {
@@ -41,6 +41,7 @@
             struct Varyings
             {
                 float4 positionCS: SV_POSITION;
+                float positionWS: TEXCOORD1;
                 float2 uv: TEXCOORD0;
                 float3 normalWS: NORMAL;
             };
@@ -51,6 +52,7 @@
             {
                 Varyings output;
                 output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
                 output.normalWS = TransformObjectToWorldNormal(input.normalOS, true);
                 output.uv = input.uv;
 
@@ -61,12 +63,11 @@
 
             float4 frag(Varyings input): SV_Target
             {
-                float3 viewDir = _WorldSpaceCameraPos.xyz;
+                float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.positionWS);
                 float3 normalDir = input.normalWS;
 
-                float ndotv = dot(viewDir, normalDir);
-                float oneMin = 1 - ndotv;
-                float fresnel = pow(oneMin, _FresnelPow);
+                float ndotv = dot(normalDir, viewDir);
+                float fresnel = pow(1 - ndotv, _FresnelPow);
 
                 return fresnel;
             }

@@ -23,7 +23,6 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             
-            
 
             CBUFFER_START(UnityPerMaterial)
             
@@ -68,14 +67,14 @@
 
             float4 frag(Varyings input): SV_Target
             {
-                float3 tex_Normal = UnpackNormal(SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, input.uv));
+                float3 nDirTS = UnpackNormal(SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, input.uv));
                 float3x3 TBN = float3x3(input.tangentWS, input.btangentWS, input.normalWS);
-                float3 nDir = normalize(mul(tex_Normal, TBN));
+                float3 nDirWS = normalize(mul(nDirTS, TBN));
 
                 Light light = GetMainLight();
                 float3 lDir = normalize(light.direction);
                 
-                float ndotl = dot(nDir, lDir);
+                float ndotl = dot(nDirWS, lDir);
                 float lambert = saturate(ndotl);
                 float3 lightCol = light.color;
                 float3 lambertCol = lightCol * lambert;

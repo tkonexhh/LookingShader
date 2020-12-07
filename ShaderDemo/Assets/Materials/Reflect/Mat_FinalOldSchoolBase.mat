@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mat_FinalOldSchoolBase
+  m_Shader: {fileID: 4800000, guid: 979fb18abac4e44d2b5e7b00c94d0ae7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Cubemap:
+        m_Texture: {fileID: 8900000, guid: 5f54960d525e24f0db24ada7e8e97fed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmmisionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 4d0e75170fd448547a4418cca03c5012, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecTex:
+        m_Texture: {fileID: 2800000, guid: 88f82916359bc6046ac8da14727ffbca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _CubemapMip: 0
+    - _EmmisionStrength: 0.2
+    - _EnvStrength: 0.045
+    - _FresnelPow: 1.12
+    - _SpecularPow: 66.8
+    m_Colors:
+    - _EnvDownCol: {r: 0, g: 0, b: 0, a: 1}
+    - _EnvSideCol: {r: 1, g: 1, b: 1, a: 0}
+    - _EnvUpCol: {r: 0.08962262, g: 0.8862028, b: 1, a: 1}
+    - _MainCol: {r: 1, g: 1, b: 1, a: 1}

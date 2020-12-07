@@ -25,6 +25,10 @@
             #pragma vertex vert
             #pragma fragment frag
 
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile _ _SHADOWS_SOFT
+
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             
@@ -93,9 +97,20 @@
                 float3 specular = pow(saturate(dot(refectDir, input.normalWS)), _SpecularPow);
                 float4 specularCol = float4(specular, 1);
 
+                VertexPositionInputs vertexInput = (VertexPositionInputs)0;
+                vertexInput.positionWS = input.positionWS;
+                float4 shadowCoord = GetShadowCoord(vertexInput);
+                half shadowAttenutation = MainLightRealtimeShadow(shadowCoord);
                 
-                float4 finalCol = ambientCol + lambertCol + specularCol ;
+                //AO遮罩
+                float aoTex = SAMPLE_TEXTURE2D(_OcclusionTex, sampler_OcclusionTex, input.uv).r;
 
+                float4 lightingCol = (ambientCol * aoTex + lambertCol + specularCol) ;
+
+                float4 shadowCol = float4(0, 0, 0, 1);
+                float4 finalCol = lerp(lightingCol, shadowCol, (1 - shadowAttenutation));
+
+                
                 return finalCol ;
             }
             
