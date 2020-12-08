@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmmisionTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e6481508c2bc267498c2fdc9b316572e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -41,12 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _CubemapMip: 0
-    - _EmmisionStrength: 0.2
-    - _EnvStrength: 0.045
-    - _FresnelPow: 1.12
-    - _SpecularPow: 66.8
+    - _EmmisionStrength: 2.27
+    - _EnvStrength: 0.794
+    - _FresnelPow: 0
+    - _SpecularPow: 90
     m_Colors:
-    - _EnvDownCol: {r: 0, g: 0, b: 0, a: 1}
-    - _EnvSideCol: {r: 1, g: 1, b: 1, a: 0}
+    - _EnvDownCol: {r: 0.7924528, g: 0.23549305, b: 0.23549305, a: 1}
+    - _EnvSideCol: {r: 0.49265084, g: 0.6792453, b: 0.34282663, a: 0}
     - _EnvUpCol: {r: 0.08962262, g: 0.8862028, b: 1, a: 1}
     - _MainCol: {r: 1, g: 1, b: 1, a: 1}
