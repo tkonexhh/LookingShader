@@ -6,7 +6,7 @@
         _DayTopCol ("DayTopCol", Color) = (1, 1, 1, 1)
         _DayBottomCol ("DayBottomCol", Color) = (1, 1, 1, 1)
         _SunRadius ("SunRadius", Range(1, 100)) = 0.5
-        [HDR]_SunCol ("SunCol", Color) = (1, 1, 1, 1)
+        _SunCol ("SunCol", Color) = (1, 1, 1, 1)
         [Header(Night)]
         _NightTopCol ("NightTopCol", Color) = (1, 1, 1, 1)
         _NightBottomCol ("NightBottomCol", Color) = (1, 1, 1, 1)
@@ -26,6 +26,8 @@
         _CloudFuzziness ("CloudFuzziness", Range(0, 1)) = 1
         _CloudCol ("CloudCol", Color) = (1, 1, 1, 1)
         _CloudNigtCol ("CloudNightCol", Color) = (0.2, 0.2, 0.2, 1)
+        _CloudRimRange ("云边缘高度", Range(0, 0.1)) = 0
+        _CloudRimPow ("云边缘模糊Pow", Range(0.001, 2)) = 1
 
         [Header(Fog)]
         _FogHeight ("FogHeight", Range(0, 100)) = 1
@@ -54,7 +56,7 @@
             float4 _DayTopCol, _DayBottomCol, _NightTopCol, _NightBottomCol, _SunCol, _MoonCol, _MoonWaneCol, _MoonWane, _CloudCol, _CloudNigtCol;
             float3 _MoonOffset;
             float2 _WindVec;
-            float _SunRadius, _MoonRadius, _WindSpeed, _FogHeight, _CloudCutoff, _CloudFuzziness;
+            float _SunRadius, _MoonRadius, _WindSpeed, _FogHeight, _CloudCutoff, _CloudFuzziness, _CloudRimRange, _CloudRimPow;
             CBUFFER_END
 
             TEXTURE2D(_CloudTex);SAMPLER(sampler_CloudTex);float4 _CloudTex_ST;
@@ -100,6 +102,7 @@
                 float _asin = asin(nomalPosWS.y) / (PI / 2);
                 float2 uv = float2(_atan2, _asin);
                 // return ceil(uv.y);
+                
                 float clampuv = remap(uv.y, -1, 1, 0, 1);
                 
                 
@@ -107,30 +110,36 @@
                 float3 lDirWS = light.direction;
                 float3 vDirWS = normalize(_WorldSpaceCameraPos.xyz - input.positionWS);
 
-                
-
                 //其实就是一个phong
                 float vdotl = dot(lDirWS, vDirWS) ;
                 float sun = pow(saturate(-vdotl), _SunRadius);//0.037
-                float step_sun = round(sun);
+                float step_sun = saturate(sun * 2);//round(sun);
                 float3 sunCol = step_sun * _SunCol;
+                // return float4(sunCol, 1);
 
                 float vdotlMoon = dot(normalize(lDirWS + _MoonOffset.xyz), vDirWS) ;
                 float moon = pow(saturate(vdotlMoon), _MoonRadius);
                 float step_moon = round(moon);
+                // return step_moon;//saturate(moon * 1.1) - step_moon;
                 // float3 moonCol = step_moon * _MoonCol;
 
                 //处理月亏 对光的方向进行一定偏转
                 float vdotlMoonMask = dot(normalize(lDirWS + _MoonOffset.xyz + _MoonWane.xyz), vDirWS) ;
                 float moonMask = pow(saturate(vdotlMoonMask), _MoonRadius / _MoonWane.w);
-                float step_moonMask = round(moonMask);
+                float step_moonMask = saturate(moonMask * 2);//round(moonMask);
 
                 //剩下的月亮区域
                 float step_FinalMoon = saturate(step_moon - step_moonMask);
                 //被挡住的区域
                 float step_HideMoon = saturate(step_moon - step_FinalMoon);
                 // return step_HideMoon;
-                float3 moonCol = step_FinalMoon * _MoonCol + step_HideMoon * _MoonWaneCol;
+                // float step_moon_Bloom = saturate(moon * 2 - step_moonMask * 2);
+                //光晕部分
+                float moonBloom = pow(saturate(moon - step_moon), 2);
+                float3 moonCol = (step_FinalMoon + moonBloom) * _MoonCol + step_HideMoon * _MoonWaneCol;
+                //saturate(moon * 1.05) - step_moon
+                // return saturate(moon - step_moon);
+                // return step_FinalMoon + (saturate(moon - step_moon));
                 // return float4(moonCol, 1);
                 
                 float3 gradientDay = lerp(_DayBottomCol, _DayTopCol, clampuv);
@@ -151,15 +160,26 @@
                 float noise2 = SAMPLE_TEXTURE2D(_CloudNoiseTex, sampler_CloudNoiseTex, noise2UV + scrollSpeed) * ceil(uv.y);
                 float4 finalNoise = skyBase * noise1 * noise2;
                 float clouds = saturate(smoothstep(_CloudCutoff, _CloudCutoff + _CloudFuzziness, finalNoise));
-                float cloudCol = lerp(_CloudNigtCol, _CloudCol, lDirWS.y);
+                
 
+                clouds = clouds * pow(saturate(uv.y - _CloudRimRange), _CloudRimPow);
+                // return clouds * pow(uv.y - 0.1, 0.9) * _CloudCol;
+                // return ;clouds - clouds * pow(uv.y - 0.05, 0.9)
+                // return clouds * pow(uv.y - 0.1, 0.9);
+                // return clouds * pow(saturate(uv.y - 0.1), 0.9);
+                // return 1 - clouds;
+                // return 1 - clouds * pow(saturate(uv.y - _CloudRimRange), _CloudRimPow);
+                // return pow(uv.y - 0.1, 0.9);
 
-                float3 finalSkyCol = skyGradient * (1 - clouds) * sunMoonMask;
+                
+                float3 finalSkyCol = skyGradient * sunMoonMask;//* (1 - clouds) * sunMoonMask;
+                // float3 finalCloudCol = clouds * cloudCol ;
+                float3 cloudCol = lerp(_CloudNigtCol, _CloudCol, clouds) * clouds;
                 float3 finalCloudCol = cloudCol * clouds ;
                 
                 float3 finalSunMoon = (moonCol + sunCol) ;
                 float3 finalRGB = finalSkyCol + finalCloudCol + finalSunMoon * (1 - clouds);//moonCol + sunCol;//skyGradient;//
-
+                // return float4(finalSunMoon * (step(clouds, 0)), 1);
                 //处理星空
 
                 //处理地平线融合

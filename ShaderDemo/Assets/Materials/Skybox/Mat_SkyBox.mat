@@ -38,23 +38,25 @@ Material:
     m_Floats:
     - _CloudCutoff: 0.023
     - _CloudFuzziness: 0.013
+    - _CloudRimPow: 0.367
+    - _CloudRimRange: 0.0567
     - _FogHeight: 100
-    - _MoonRadius: 42.2
+    - _MoonRadius: 47.4
     - _MoonWane: -0.382
     - _SunRadius: 100
     - _WindSpeed: 0.65
     m_Colors:
-    - _CloudCol: {r: 1, g: 1, b: 1, a: 1}
-    - _CloudNigtCol: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+    - _CloudCol: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+    - _CloudNigtCol: {r: 0, g: 0, b: 0, a: 1}
     - _DayBottomCol: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
     - _DayTopCol: {r: 0.08962262, g: 0.6894006, b: 1, a: 1}
     - _LightPos: {r: 38.8, g: 29.6, b: 0, a: 1}
     - _MainCol: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
     - _MoonCol: {r: 1, g: 1, b: 1, a: 1}
     - _MoonOffset: {r: 0, g: 0.31, b: 0, a: 0}
-    - _MoonWane: {r: 0.13, g: 0, b: 0, a: 1.11}
-    - _MoonWaneCol: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+    - _MoonWane: {r: 0.15, g: 0, b: 0, a: 1}
+    - _MoonWaneCol: {r: 0.2784314, g: 0.31764707, b: 0.42352945, a: 0.41960785}
     - _NightBottomCol: {r: 0, g: 0, b: 0, a: 1}
     - _NightTopCol: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
-    - _SunCol: {r: 3.7803922, g: 3.5137255, b: 1.945098, a: 1}
-    - _WindVec: {r: 0.19, g: 0.1, b: 0, a: 0}
+    - _SunCol: {r: 1, g: 0.83921576, b: 0, a: 1}
+    - _WindVec: {r: 0.1, g: 0.1, b: 0, a: 0}
