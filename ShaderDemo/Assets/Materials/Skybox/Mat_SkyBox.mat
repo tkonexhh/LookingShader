@@ -19,19 +19,42 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _CloudDistortTex:
+        m_Texture: {fileID: 2800000, guid: b763c97c9f18541dc8dcdfbe001c547f, type: 3}
+        m_Scale: {x: 0.2, y: 0.2}
+        m_Offset: {x: 0, y: 0}
+    - _CloudNoiseTex:
+        m_Texture: {fileID: 2800000, guid: d09c573392df64e7db94c708cedd1b8f, type: 3}
+        m_Scale: {x: 0.59, y: 0.59}
+        m_Offset: {x: 4.17, y: 0}
+    - _CloudTex:
+        m_Texture: {fileID: 2800000, guid: a3109c97847d7445e8fe204f559c2eac, type: 3}
+        m_Scale: {x: 0.63, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 0a5307609c3894c2eade298fba321605, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _MoonRadius: 63.7
-    - _SunRadius: 63.7
+    - _CloudCutoff: 0.023
+    - _CloudFuzziness: 0.013
+    - _FogHeight: 100
+    - _MoonRadius: 42.2
+    - _MoonWane: -0.382
+    - _SunRadius: 100
+    - _WindSpeed: 0.65
     m_Colors:
-    - _DayBottomCol: {r: 0.3490566, g: 0.1761748, b: 0.1761748, a: 1}
-    - _DayTopCol: {r: 0.5090335, g: 0.7545836, b: 0.8773585, a: 1}
+    - _CloudCol: {r: 1, g: 1, b: 1, a: 1}
+    - _CloudNigtCol: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+    - _DayBottomCol: {r: 1, g: 0.3820755, b: 0.3820755, a: 1}
+    - _DayTopCol: {r: 0.08962262, g: 0.6894006, b: 1, a: 1}
     - _LightPos: {r: 38.8, g: 29.6, b: 0, a: 1}
     - _MainCol: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
-    - _MoonCol: {r: 0.49858648, g: 0.8301887, b: 0.36418653, a: 1}
+    - _MoonCol: {r: 1, g: 1, b: 1, a: 1}
+    - _MoonOffset: {r: 0, g: 0.31, b: 0, a: 0}
+    - _MoonWane: {r: 0.13, g: 0, b: 0, a: 1.11}
+    - _MoonWaneCol: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
     - _NightBottomCol: {r: 0, g: 0, b: 0, a: 1}
-    - _NightTopCol: {r: 0.76161444, g: 0.9193366, b: 0.990566, a: 1}
-    - _SunCol: {r: 0.8490566, g: 0, b: 0, a: 1}
+    - _NightTopCol: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+    - _SunCol: {r: 3.7803922, g: 3.5137255, b: 1.945098, a: 1}
+    - _WindVec: {r: 0.19, g: 0.1, b: 0, a: 0}
