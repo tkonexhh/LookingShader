@@ -54,7 +54,7 @@ Material:
     - _MainCol: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
     - _MoonCol: {r: 1, g: 1, b: 1, a: 1}
     - _MoonOffset: {r: 0, g: 0.31, b: 0, a: 0}
-    - _MoonWane: {r: 0.15, g: 0, b: 0, a: 1}
+    - _MoonWane: {r: 0.1, g: 0, b: 0.18, a: 1}
     - _MoonWaneCol: {r: 0.2784314, g: 0.31764707, b: 0.42352945, a: 0.41960785}
     - _NightBottomCol: {r: 0, g: 0, b: 0, a: 1}
     - _NightTopCol: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}

@@ -1,15 +1,15 @@
-﻿Shader "XHH/HalftoneShadow"
+﻿Shader "XHH/ScreenUV"
 {
     Properties
     {
-        
-        _Tilling ("Tilling", int) = 10
-        _Width ("Width", Range(-1, 0)) = 0
-        _Min ("Min", Range(-2, 0)) = 0.7
+        _MainTex ("MainTex", 2D) = "White" { }
+        _ScreenTex ("ScreenTex", 2D) = "white" { }
+        _Step ("Step", Range(0, 1)) = 0.1
     }
     SubShader
     {
         Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
+
         Pass
         {
             Tags { "LightMode" = "UniversalForward" }
@@ -20,37 +20,40 @@
             
             #pragma vertex vert
             #pragma fragment frag
-            //------------
-            //Unity defined keywords
+
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
             #include "../../CustomHlsl/CustomHlsl.hlsl"
             
-            CBUFFER_START(UnityPerMaterial);
-            int _Tilling;
-            float _Min, _Width;
+            CBUFFER_START(UnityPerMaterial)
+
+
             CBUFFER_END
 
+            TEXTURE2D(_MainTex);SAMPLER(sampler_MainTex);
+            TEXTURE2D(_ScreenTex);SAMPLER(sampler_ScreenTex);float4 _ScreenTex_ST;
+
+            float _Step;
             
-
-            SAMPLER(_CameraDepthTexture);
-
-
             struct Attributes
             {
                 float4 positionOS: POSITION;
                 float2 uv: TEXCOORD0;
                 float3 normalOS: NORMAL;
+                float4 tangentOS: TANGENT;
             };
+
 
             struct Varyings
             {
                 float4 positionCS: SV_POSITION;
                 float2 uv: TEXCOORD0;
                 float3 normalWS: NORMAL;
+                float2 screenUV: TEXCOORD2;
             };
+
 
             
             Varyings vert(Attributes input)
@@ -60,30 +63,38 @@
                 output.normalWS = TransformObjectToWorldNormal(input.normalOS, true);
                 output.uv = input.uv;
                 
+                
+                float3 positionVS = TransformObjectToView(input.positionOS.xyz);
+                float originPos = mul(UNITY_MATRIX_MV, float4(0, 0, 0, 1)).z;
+                output.screenUV = positionVS.xy / positionVS.z;
+                output.screenUV *= originPos;
                 return output;
             }
 
+
+            
+
+
             float4 frag(Varyings input): SV_Target
             {
-                float4 col;
-                Light myLight = GetMainLight();
-                float3 lightDir = normalize(myLight.direction);
-                float4 lightColor = float4(myLight.color, 1);
-                float ldotn = dot(lightDir, input.normalWS);
-                // float halfLambert = lightAten * 0.5 + 0.5;
-                float halfLambert = remap(ldotn, 1, _Width, _Min, 2);
-                float2 screenUV = input.positionCS.xy / _ScreenParams.xy;
-                float2 tileSum = _ScreenParams.xy / _Tilling;//input.positionCS.xy / _ScreenParams.xy * _Tilling;
-                screenUV = screenUV * tileSum;
-                screenUV = frac(screenUV);
-                screenUV = remap(screenUV, 0, 1.0, -0.5, 0.5);
+
+                Light light = GetMainLight();
+                float3 lDirWS = normalize(light.direction);
+
+                float ndotl = dot(input.normalWS, lDirWS);
+                float lambert = saturate(ndotl);
+                // return 1 - step(0.1, lambert);
                 
-                float length = (screenUV.x * screenUV.x + screenUV.y * screenUV.y);
-                // length = 1 - length;
-                float c = pow(length, halfLambert);
-                c = round(c);
-                return c ;
-                return float4(screenUV.x, screenUV.y, 0, 1);//lerpColor + texCol;//lerp(lightColor, texCol, halfLambert);//float4(screenUV, 1, 1);//Hald - Lambert
+                half4 var_MainTex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+                half4 var_ScreenTex = SAMPLE_TEXTURE2D(_ScreenTex, sampler_ScreenTex, input.screenUV * _ScreenTex_ST.xy + _ScreenTex_ST.zw);
+                
+                float3 diffuse = var_MainTex.rgb * lambert;
+                float3 dark = var_ScreenTex.rgb  ;
+
+
+                float3 finalRGB = lerp(dark, diffuse, saturate(lambert + _Step));
+                
+                return float4(finalRGB, 1);
             }
             
             ENDHLSL
