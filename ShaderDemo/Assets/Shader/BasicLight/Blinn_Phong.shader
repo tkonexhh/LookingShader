@@ -28,8 +28,7 @@
             float4 _SpecularColor;
             CBUFFER_END
 
-            float4 _CameraColorTexture_TexelSize;
-            SAMPLER(_CameraColorTexture);
+            float4 _CameraColorTexture_TexelSize; SAMPLER(_CameraColorTexture);
 
 
             struct Attributes
@@ -75,8 +74,9 @@
                 //高光
                 float specular = max(0, dot(halfDir, input.normalWS));
                 float4 specularCol = pow(specular, _SpecularRange) * _SpecularColor;
+                return specularCol;
 
-                float4 diffuseCol = saturate((lightColor * halfLambert));
+                float4 diffuseCol = saturate((lightColor * lambert));
                 float4 finalCol = diffuseCol + specularCol;
                 return finalCol;
             }

@@ -13,6 +13,11 @@ float2 remap(float2 target, float oldMin, float oldMax, float newMin, float newM
     return target;//(target-oldMin)/(oldMax-oldMin)*(newMax-newMin)+newMin;
 }
 
+float sqr(float num)
+{
+    return num * num;
+}
+
 
 
 float4x4 GetObjectToViewMatrix()

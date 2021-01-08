@@ -2,6 +2,7 @@
     #define CUSTOM_LIGHTING
 
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+    #include "../CustomHlsl/CustomHlsl.hlsl"
     //---------------------------
     //helper functions
     float MixFunction(float i, float j, float x)
@@ -58,7 +59,7 @@
         float roughnessSqr = roughness * roughness;
         float NdotHSqr = NdotH * NdotH;
         float TanNdotHSqr = (1 - NdotHSqr) / NdotHSqr;
-        return(1.0 / 3.1415926535) * sqrt(roughness / (NdotHSqr * (roughnessSqr + TanNdotHSqr)));
+        return(1.0 / 3.1415926535) * sqr(roughness / (NdotHSqr * (roughnessSqr + TanNdotHSqr)));
     }
 
     float TrowbridgeReitzNDF(float NdotH, float roughness)
