@@ -1,4 +1,4 @@
-﻿Shader "Xhh/Matcap"
+﻿Shader "XHH/Matcap"
 {
     Properties
     {

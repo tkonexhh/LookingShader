@@ -53,7 +53,8 @@
             float4 frag(Varyings input): SV_Target
             {
                 //将255米的高度压缩到0-1写入r，每一米内的高度写入b，复原时r*255+b就是实际高度
-                return float4(floor(input.depth) / 255, frac(input.depth), 1, 1);
+                return float4(floor(input.depth) / 255, 0, 0, 1);
+                return float4(floor(input.depth) / 255, frac(input.depth), 0, 1);
             }
             
             ENDHLSL
