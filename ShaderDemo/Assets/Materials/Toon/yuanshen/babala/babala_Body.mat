@@ -41,8 +41,8 @@ Material:
     - _CelShadeSoftness: 0.05
     - _Cutoff: 0.702
     - _MainLightIgnoreCelShade: 0.077
-    - _OutlineWidth: 1
+    - _OutlineWidth: 0.001
     - _UseAlphaClipping: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _OutlineColor: {r: 1, g: 0.07075467, b: 0.07075467, a: 1}

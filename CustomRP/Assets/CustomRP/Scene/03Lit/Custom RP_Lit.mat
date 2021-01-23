@@ -27,6 +27,8 @@ Material:
     - _Clipping: 1
     - _Cutoff: 0
     - _DstBlend: 1
+    - _Metallic: 0
+    - _Smoothness: 0.419
     - _SrcBlend: 1
     - _ZWrite: 1
     m_Colors:
