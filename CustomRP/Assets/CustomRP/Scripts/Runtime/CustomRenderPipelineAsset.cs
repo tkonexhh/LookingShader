@@ -10,8 +10,10 @@ public class CustomRenderPipelineAsset : RenderPipelineAsset
     [SerializeField] bool useGPUInstancing;
     [SerializeField] bool useSRPBatcher;
 
+    [SerializeField] ShadowSettings shadowSettings = default;
+
     protected override RenderPipeline CreatePipeline()
     {
-        return new CustomRenderPipeline(useDynamicBatching, useGPUInstancing, useSRPBatcher);
+        return new CustomRenderPipeline(useDynamicBatching, useGPUInstancing, useSRPBatcher, shadowSettings);
     }
 }

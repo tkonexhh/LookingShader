@@ -60,6 +60,7 @@
         float4 baseColor = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseColor);
         float4 var_BaseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
         float4 base = var_BaseMap * baseColor;
+        // return base.a;
         #ifdef _CLIPPING
             clip(base.a - UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Cutoff));
         #endif
@@ -72,8 +73,11 @@
         surface.alpha = base.a;
         surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
         surface.smoothness = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Smoothness);
-
-        BRDF brdf = GetBRDF(surface);
+        #ifdef _PREMULTIPLY_ALPHA
+            BRDF brdf = GetBRDF(surface, true);
+        #else
+            BRDF brdf = GetBRDF(surface);
+        #endif
         float3 lighting = GetLighting(surface, brdf);
 
         return float4(lighting, surface.alpha);

@@ -16,21 +16,25 @@ public partial class CameraRenderer
     static ShaderTagId unlitShaderTagID = new ShaderTagId("SRPDefaultUnlit"), litShaderTagID = new ShaderTagId("CustomLit");
 
     Lighting lighting = new Lighting();
-    public void Render(ScriptableRenderContext context, Camera camera, bool useDynamicBatching, bool useGPUInstancing)
+    public void Render(ScriptableRenderContext context, Camera camera, bool useDynamicBatching, bool useGPUInstancing, ShadowSettings shadowSettings)
     {
         this.context = context;
         this.camera = camera;
 
         PrepareBuffer();
         PrepareForSceneWindow();
-        if (!Cull())
+        if (!Cull(shadowSettings.maxDistance))
             return;
 
+        buffer.BeginSample(SampleName);
+        ExecuteBuffer();
+        lighting.Setup(context, cullingResults, shadowSettings);
+        buffer.EndSample(SampleName);
         Setup();
-        lighting.Setup(context, cullingResults);
         DrawVisibleGeometry(useDynamicBatching, useGPUInstancing);
         DrawUnsupportedShaders();
         DrawGizmos();
+        lighting.CleanUp();
         Submit();
 
     }
@@ -88,11 +92,11 @@ public partial class CameraRenderer
     /// <summary>
     /// 剔除
     /// </summary>
-    bool Cull()
+    bool Cull(float maxShadowDistance)
     {
-        ScriptableCullingParameters parameters;
-        if (camera.TryGetCullingParameters(out parameters))
+        if (camera.TryGetCullingParameters(out ScriptableCullingParameters parameters))
         {
+            parameters.shadowDistance = Mathf.Min(maxShadowDistance, camera.farClipPlane);//设置阴影距离
             cullingResults = context.Cull(ref parameters);
             return true;
         }
