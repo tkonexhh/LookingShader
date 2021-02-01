@@ -33,4 +33,4 @@ Material:
     - _SrcBlend: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.9245283, g: 0.7904942, b: 0.2660199, a: 0.98039216}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.98039216}

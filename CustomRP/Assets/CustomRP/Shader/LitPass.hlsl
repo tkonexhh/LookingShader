@@ -3,6 +3,7 @@
 
     #include "../ShaderLibrary/Common.hlsl"
     #include "../ShaderLibrary/Surface.hlsl"
+    #include "../ShaderLibrary/Shadows.hlsl"
     #include "../ShaderLibrary/Light.hlsl"
     #include "../ShaderLibrary/BRDF.hlsl"
     #include "../ShaderLibrary/Lighting.hlsl"
@@ -12,9 +13,7 @@
     // CBUFFER_END
 
 
-
     UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
-    // float4 _BaseColor;
     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseMap_ST)
     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
     UNITY_DEFINE_INSTANCED_PROP(float, _Cutoff)
@@ -67,8 +66,10 @@
         
 
         Surface surface;
+        surface.positionWS = input.positionWS;
         surface.normal = normalize(input.normalWS);
         surface.viewDir = normalize(_WorldSpaceCameraPos - input.positionWS);
+        surface.depth = -TransformWorldToView(input.positionWS).z;//变化到相机下的Z轴，因为相机变化是看向-Z轴的 这里--+ 得到正Z值
         surface.color = base.rgb;
         surface.alpha = base.a;
         surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
