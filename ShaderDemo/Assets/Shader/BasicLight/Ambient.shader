@@ -74,6 +74,7 @@
 
             float4 frag(Varyings input): SV_Target
             {
+                input.normalWS = normalize(input.normalWS);
                 half4 tex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
                 float upMask = saturate(input.normalWS.y);
                 float downMask = saturate(-input.normalWS.y);

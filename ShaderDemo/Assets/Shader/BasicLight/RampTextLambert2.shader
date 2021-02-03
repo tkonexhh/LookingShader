@@ -63,7 +63,7 @@
 
             float4 frag(Varyings input): SV_Target
             {
-                
+                input.normalWS = normalize(input.normalWS);
                 Light myLight = GetMainLight();
                 float3 lightDir = normalize(myLight.direction);
                 float4 lightColor = float4(myLight.color, 1);
