@@ -23,17 +23,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WaterNoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterNormalTex:
+        m_Texture: {fileID: 2800000, guid: a41c6cdd676e846ca821c03e539e96d1, type: 3}
+        m_Scale: {x: 0.18, y: 0.18}
+        m_Offset: {x: 0, y: 0}
+    - _WaterRampTex:
+        m_Texture: {fileID: 2800000, guid: 6c7576a9002cb485dab2629d41f7aae0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DepthOffset: 6.1
+    - _DepthOffset: 4.4
     - _FoamThickness: 1005.2
-    - _RefractStrength: 0.688
+    - _RefractStrength: 0.027
     - _Temp1: 0.08
+    - _WaterFogStength: 0.17
     m_Colors:
-    - _ColorDark: {r: 0.010145942, g: 0.31613925, b: 0.7169812, a: 1}
-    - _ColorLight: {r: 0.01375042, g: 0.9716981, b: 0.9533139, a: 1}
+    - _ColorDark: {r: 0.010902455, g: 0.3151913, b: 0.46226418, a: 1}
+    - _ColorLight: {r: 0.23139909, g: 0.754717, b: 0.7450606, a: 1}
     - _EdgeColor: {r: 0.9433962, g: 0.93894625, b: 0.93894625, a: 1}
     - _MainColor: {r: 0.1505874, g: 0.37071624, b: 0.6792453, a: 1}
-    - _Wave1: {r: 2.32, g: 2.74, b: 0.2, a: 43.66}
-    - _Wave2: {r: -0.8, g: 5.95, b: 0.35, a: 60.8}
-    - _Wave3: {r: 1.69, g: -7.53, b: 0.1, a: 48.4}
-    - _Wave4: {r: 0.44, g: 7.07, b: 0.1, a: 21.3}
+    - _Wave1: {r: 0.15, g: -0.3, b: 0.09, a: 43.66}
+    - _Wave2: {r: 0.09, g: 0.48, b: 0.11, a: 60.8}
+    - _Wave3: {r: -0.12, g: 4.83, b: 0.02, a: 48.4}
+    - _Wave4: {r: -0.1, g: 0.24, b: 0.05, a: 21.3}
