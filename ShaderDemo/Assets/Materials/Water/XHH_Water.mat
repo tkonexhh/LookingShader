@@ -23,10 +23,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _WaterNoiseTex:
-        m_Texture: {fileID: 0}
+    - _WaterDistortTex:
+        m_Texture: {fileID: 2800000, guid: 82bbf0eeb36e44b4bb402e4d88c57d62, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WaterNoiseTex:
+        m_Texture: {fileID: 2800000, guid: a99b4eb2622bc4b9e9f6714751f4f4ed, type: 3}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0, y: 10}
     - _WaterNormalTex:
         m_Texture: {fileID: 2800000, guid: a41c6cdd676e846ca821c03e539e96d1, type: 3}
         m_Scale: {x: 0.18, y: 0.18}
@@ -36,17 +40,25 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DepthOffset: 4.4
+    - _DepthOffset: 6.7
+    - _FoamSpeed: 1
+    - _FoamStep: 0.935
     - _FoamThickness: 1005.2
-    - _RefractStrength: 0.027
+    - _FoamWidth: 5.89
+    - _NoiseStep: 0.899
+    - _RefractStrength: 0.025
+    - _Speed: 0.5
     - _Temp1: 0.08
-    - _WaterFogStength: 0.17
+    - _WaterFogStength: 0.22
     m_Colors:
-    - _ColorDark: {r: 0.010902455, g: 0.3151913, b: 0.46226418, a: 1}
-    - _ColorLight: {r: 0.23139909, g: 0.754717, b: 0.7450606, a: 1}
-    - _EdgeColor: {r: 0.9433962, g: 0.93894625, b: 0.93894625, a: 1}
+    - _ColorDark: {r: 0.064524755, g: 0.33715385, b: 0.4716981, a: 1}
+    - _ColorLight: {r: 0.3457636, g: 0.5234366, b: 0.6981132, a: 1}
+    - _EdgeColor: {r: 1, g: 0.1745283, b: 0.1745283, a: 1}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 0.98039216}
+    - _FoamVector: {r: 0.2, g: 0.2, b: 0, a: 0.05}
     - _MainColor: {r: 0.1505874, g: 0.37071624, b: 0.6792453, a: 1}
-    - _Wave1: {r: 0.15, g: -0.3, b: 0.09, a: 43.66}
-    - _Wave2: {r: 0.09, g: 0.48, b: 0.11, a: 60.8}
-    - _Wave3: {r: -0.12, g: 4.83, b: 0.02, a: 48.4}
-    - _Wave4: {r: -0.1, g: 0.24, b: 0.05, a: 21.3}
+    - _NoiseStep: {r: 0.29, g: 0.57, b: 0, a: 0}
+    - _Wave1: {r: 1, g: 1, b: 0.04, a: 60}
+    - _Wave2: {r: 1, g: 0.6, b: 0.02, a: 31}
+    - _Wave3: {r: 1, g: 1.3, b: 0.07, a: 18}
+    - _Wave4: {r: -0.1, g: 0.24, b: 0.03, a: 21.3}

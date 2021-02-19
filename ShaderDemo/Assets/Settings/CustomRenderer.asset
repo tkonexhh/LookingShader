@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CustomRenderer
+  m_EditorClassIdentifier: Assembly-CSharp::CustomScriptableRendererData
+  m_RendererFeatures:
+  - {fileID: 9142140327518567644}
+  m_RendererFeatureMap: dc7c84d43068df7e
+  m_OpaqueLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &9142140327518567644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fb1e1f93b3a449cbbc41477ce061f0, type: 3}
+  m_Name: NewCustomRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    renderPassEvent: 300
+    blitMaterial: {fileID: 2100000, guid: 78d87a3c1fea34cca883cef0f7430e51, type: 2}
+    renderTexture: {fileID: 8400000, guid: dcd5070d9138d4e408b9068e8ec57737, type: 2}

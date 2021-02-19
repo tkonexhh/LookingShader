@@ -37,12 +37,16 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _CelShadeMidPoint: -0.5
-    - _CelShadeSoftness: 0.05
-    - _Cutoff: 0.702
-    - _MainLightIgnoreCelShade: 0.077
+    - _CelShadeMidPoint: 0
+    - _CelShadeSoftness: 0.046
+    - _Cutoff: 0.5
+    - _MainLightIgnoreCelShade: 0.269
     - _OutlineWidth: 0.001
+    - _RimMax: 1
+    - _RimMin: 0.831
+    - _RimSmooth: 0.928
     - _UseAlphaClipping: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 0.07075467, b: 0.07075467, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}

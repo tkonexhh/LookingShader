@@ -5,7 +5,7 @@ Shader "XHH/Toon/Yuanshen"
     {
         [Header(Base Color)]
         _BaseMap ("BaseMap", 2D) = "white" { }
-        [HDR]_BaseColor ("BaseColor", Color) = (1, 1, 1, 1)
+        _BaseColor ("BaseColor", Color) = (1, 1, 1, 1)
 
         [Header(Alpha)]
         [Toggle(_UseAlphaClipping)]_UseAlphaClipping ("_UseAlphaClipping", Float) = 0
@@ -17,10 +17,17 @@ Shader "XHH/Toon/Yuanshen"
         _CelShadeSoftness ("_CelShadeSoftness", Range(0, 1)) = 0.05
         _MainLightIgnoreCelShade ("_MainLightIgnoreCelShade", Range(0, 1)) = 0
 
+        [Header(RimLight)]
+        [HDR]_RimColor ("Rim Color", Color) = (1, 1, 1, 1)
+        _RimMin ("Rim Min", Range(0, 1)) = 0.1
+        _RimMax ("Rim Max", Range(0, 1)) = 0.7
+        _RimSmooth ("Rim Smooth", Range(0, 1)) = 0.5
+
         [Header(Outline)]
-        _OutlineWidth ("_OutlineWidth (World Space)", Range(0, 4)) = 1
+        _OutlineWidth ("_OutlineWidth (World Space)", Range(0, 4)) = 0.002
         _OutlineColor ("_OutlineColor", Color) = (0.5, 0.5, 0.5, 1)
     }
+
     SubShader
     {
         Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }

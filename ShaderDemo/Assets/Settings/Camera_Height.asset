@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
-  m_Name: ForwardRenderer
+  m_Name: Camera_Height
   m_EditorClassIdentifier: 
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: 6670766021892539242}
+  m_RendererFeatureMap: 6a83a68a5a52935c
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -36,3 +37,20 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
+--- !u!114 &6670766021892539242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fb1e1f93b3a449cbbc41477ce061f0, type: 3}
+  m_Name: NewCustomRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    renderPassEvent: 300
+    blitMaterial: {fileID: 2100000, guid: 78d87a3c1fea34cca883cef0f7430e51, type: 2}
+    renderTexture: {fileID: 8400000, guid: dcd5070d9138d4e408b9068e8ec57737, type: 2}
