@@ -1,24 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: CustomRenderer
-  m_EditorClassIdentifier: Assembly-CSharp::CustomScriptableRendererData
-  m_RendererFeatures:
-  - {fileID: 9142140327518567644}
-  m_RendererFeatureMap: dc7c84d43068df7e
-  m_OpaqueLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &9142140327518567644
+--- !u!114 &-3436184927098706326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35,3 +17,40 @@ MonoBehaviour:
     renderPassEvent: 300
     blitMaterial: {fileID: 2100000, guid: 78d87a3c1fea34cca883cef0f7430e51, type: 2}
     renderTexture: {fileID: 8400000, guid: dcd5070d9138d4e408b9068e8ec57737, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6181a4fe8e0d74bb0bb3d34a896a1cb9, type: 3}
+  m_Name: CustomRenderer
+  m_EditorClassIdentifier: 
+  m_RendererFeatures:
+  - {fileID: -3436184927098706326}
+  - {fileID: 8347349796193557040}
+  m_RendererFeatureMap: 6ae6bab5033850d030da0bda69bed773
+  m_OpaqueLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &8347349796193557040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b62f893d0b64ab4afbcd7906325cff, type: 3}
+  m_Name: NewPlayerMoveRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    renderPassEvent: 300
+    blitMaterial: {fileID: 2100000, guid: 8c24fe136882f4bf1b4c55984431afca, type: 2}
+    textureName: _MainTex
+    renderTexture: {fileID: 8400000, guid: 7bb660c59e1ee457898e5682e1c63f81, type: 2}

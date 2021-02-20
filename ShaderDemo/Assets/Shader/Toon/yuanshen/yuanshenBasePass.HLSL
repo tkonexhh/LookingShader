@@ -28,6 +28,7 @@
         float4 positionOS: POSITION;
         float2 uv: TEXCOORD0;
         float3 normalOS: NORMAL;
+        float4 color: COLOR;
     };
 
 
@@ -36,6 +37,7 @@
         float4 positionCS: SV_POSITION;
         float3 positionWS: TEXCOORD1;
         float2 uv: TEXCOORD0;
+        float4 color: COLOR;
         float3 normalWS: NORMAL;
     };
 
@@ -59,7 +61,7 @@
         output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
         output.normalWS = TransformObjectToWorldNormal(input.normalOS, true);
         output.uv = input.uv;
-
+        output.color = input.color;
 
         return output;
     }
@@ -155,6 +157,7 @@
 
     float4 frag(Varyings input): SV_Target
     {
+        return input.color;
         ToonSurfaceData surfaceData = InitSurfaceData(input);
         LightingData lightingData = InitLightintData(input);
 

@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Camera_Height"
+﻿Shader "XHH/Camera_Height"
 {
     Properties
     {
@@ -35,7 +35,6 @@
             {
                 float4 positionOS: POSITION;
                 float2 uv: TEXCOORD0;
-                float3 normalOS: NORMAL;
             };
 
 
@@ -43,7 +42,6 @@
             {
                 float4 positionCS: SV_POSITION;
                 float2 uv: TEXCOORD0;
-                float3 normalWS: NORMAL;
             };
 
 
@@ -52,9 +50,7 @@
             {
                 Varyings output;
                 output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
-                output.normalWS = TransformObjectToWorldNormal(input.normalOS, true);
                 output.uv = input.uv;
-
 
                 return output;
             }
@@ -62,12 +58,13 @@
 
             float4 frag(Varyings input): SV_Target
             {
+                
                 // float4 var_MainTex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
                 // return var_MainTex ;
                 float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_MainTex, input.uv);
                 // return depth ;
                 float linearDepth = LinearEyeDepth(depth, _ZBufferParams);//Linear01Depth LinearEyeDepth
-                return linearDepth;
+                return linearDepth / 10;
                 // linearDepth *= 100;
                 return float4(linearDepth, linearDepth, linearDepth, 1);//float4(1, 0, 0, 1);
             }
