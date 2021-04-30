@@ -32,9 +32,9 @@ Material:
         m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 10}
     - _WaterNormalTex:
-        m_Texture: {fileID: 2800000, guid: a41c6cdd676e846ca821c03e539e96d1, type: 3}
-        m_Scale: {x: 0.18, y: 0.18}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: a41da5f5671718b47bbc71e9ef691103, type: 3}
+        m_Scale: {x: 8, y: 8}
+        m_Offset: {x: 1, y: 1}
     - _WaterRampTex:
         m_Texture: {fileID: 2800000, guid: 6c7576a9002cb485dab2629d41f7aae0, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -47,6 +47,8 @@ Material:
     - _FoamWidth: 5.89
     - _NoiseStep: 0.899
     - _RefractStrength: 0.025
+    - _SpecularHardness: 0.863
+    - _SpecularRange: 107.9
     - _Speed: 0.5
     - _Temp1: 0.08
     - _WaterFogStength: 0.22
@@ -58,7 +60,9 @@ Material:
     - _FoamVector: {r: 0.2, g: 0.2, b: 0, a: 0.05}
     - _MainColor: {r: 0.1505874, g: 0.37071624, b: 0.6792453, a: 1}
     - _NoiseStep: {r: 0.29, g: 0.57, b: 0, a: 0}
+    - _WaterNormalMovement: {r: 0.93, g: 0.73, b: 0.3, a: -0.1}
     - _Wave1: {r: 1, g: 1, b: 0.04, a: 60}
     - _Wave2: {r: 1, g: 0.6, b: 0.02, a: 31}
     - _Wave3: {r: 1, g: 1.3, b: 0.07, a: 18}
     - _Wave4: {r: -0.1, g: 0.24, b: 0.03, a: 21.3}
+    - _waterNormalMovement: {r: 2.71, g: 0, b: 0, a: 0}
